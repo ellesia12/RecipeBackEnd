@@ -1,3 +1,5 @@
+const express = require("express");
+mockRecipesRouter = express.Router();
 const recipes = [
 {
   id: "6XIxvB6D65ferGw8e4uDXv",
@@ -29,3 +31,20 @@ const recipes = [
   url: "//images.ctfassets.net/3evqbw19xpvd/18yDKyrmt2cjZXHAfpz9sN/170433bf59bceadf0d3d6eb0b4ace63b/homepage-nigerian.jpg",
 },
 ]
+
+// Get all countries
+mockRecipesRouter.get("/", (req, res, next) => {
+  res.send(recipes);
+});
+
+// Get a single expression
+mockCountryRouter.get("/:id", (req, res, next) => {
+  const foundRecipe = getElementById(req.params.id, recipes);
+  if (foundRecipe) {
+    res.send(foundRecipe);
+  } else {
+    res.status(404).send();
+  }
+});
+
+module.exports = mockRecipesRouter;
