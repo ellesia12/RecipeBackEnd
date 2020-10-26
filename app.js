@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require("cors")
 const app = express();
 const http = require("http");
 const hostname = '127.0.0.1';
@@ -14,7 +15,7 @@ const port = 3000;
 //   res.end('am i working?');
 // });
 
-
+app.use(cors())
 //listen for request on port 3000, and as a callback function have the port listened on logged
 app.listen(port,  () => {
   console.log(`the server is working http://${hostname}:${port}/`)
