@@ -26,11 +26,15 @@ mockCountryRouter.get("/", (req, res, next) => {
 
 // Get a single expression
 mockCountryRouter.get("/:id", (req, res, next) => {
-  const foundCountry = getElementById(req.params.id, countries);
+  // console.log({paramsId: req.params.id})
+  const foundCountry = countries.find(country => country.id === parseInt(req.params.id,10)
+    // console.log({countryId: country.id});
+  )
+  console.log(foundCountry);
   if (foundCountry) {
     res.send(foundCountry);
   } else {
-    res.status(404).send();
+    res.status(404).send("There's no country with this id");
   }
 });
 

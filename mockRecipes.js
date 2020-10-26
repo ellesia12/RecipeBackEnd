@@ -36,14 +36,14 @@ const recipes = [
 mockRecipesRouter.get("/", (req, res, next) => {
   res.send(recipes);
 });
-
 // Get a single expression
-mockCountryRouter.get("/:id", (req, res, next) => {
-  const foundRecipe = getElementById(req.params.id, recipes);
+mockRecipesRouter.get("/:id", (req, res, next) => {
+  const foundRecipe = recipes.find(recipe => recipe.id === req.params.id);
+  console.log(recipes.id)
   if (foundRecipe) {
     res.send(foundRecipe);
   } else {
-    res.status(404).send();
+    res.status(404).send('This recipe was not found');
   }
 });
 
