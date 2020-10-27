@@ -7,12 +7,19 @@ const countries = [
   {
     id: 1,
     countryDescription: "Brazil",
-    fileName: "/images/countries/brazil.jpg",
+
+    contentType: "image/jpeg",
+    fileName: "brazil.jpg",
+    url:
+      "https://www.impulsonegocios.com/wp-content/uploads/2020/05/Cristo-redentor-RJ-DEF.jpg",
   },
   {
     id: 2,
     countryDescription: "Nigeria",
-    fileName: "/images/countries/Nigeria.jpg",
+    contentType: "image/jpeg",
+    fileName: "Nigeria-national-arts-theatre.jpg",
+    url:
+      "https://media-cdn.tripadvisor.com/media/photo-s/05/7a/1a/bc/national-arts-theatre.jpg",
   },
   {
     id: 3,
