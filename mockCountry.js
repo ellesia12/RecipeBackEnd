@@ -1,21 +1,28 @@
 const express = require("express");
+const fs = require("fs")
+const app = express();
+
 mockCountryRouter = express.Router();
 const countries = [
   {
     id: 1,
     countryDescription: "Brazil",
-    contentType: "image/jpeg",
-    fileName: "brazil.jpg",
-    url:
-      "//images.ctfassets.net/3evqbw19xpvd/2B1dNgnRyDv125ytsrRaG1/d830ef0bfcd962b5da234bd1b613e28a/brazil.jpg",
+    fileName: "/images/countries/brazil.jpg",
   },
   {
     id: 2,
     countryDescription: "Nigeria",
-    contentType: "image/jpeg",
-    fileName: "Nigeria-national-arts-theatre.jpg",
-    url:
-      "//images.ctfassets.net/3evqbw19xpvd/6gRT1HkV5v9lKVNSuKfhDd/3b1d1034fbd4f736e7bb816e797ae9db/Nigeria-national-arts-theatre.jpg",
+    fileName: "/images/countries/Nigeria.jpg",
+  },
+  {
+    id: 3,
+    countryDescription: "Germany",
+    fileName: "/images/countries/Germany.jpg",
+  },
+  {
+    id: 4,
+    countryDescription: "United States",
+    fileName: "/images/countries/USA.jpg",
   },
 ];
 
@@ -24,19 +31,23 @@ mockCountryRouter.get("/", (req, res, next) => {
   res.send(countries);
 });
 
+
+// app.use(express.static('/assets/images/countries/'))
 // Get a single expression
 mockCountryRouter.get("/:id", (req, res, next) => {
-  // console.log({paramsId: req.params.id})
-  const foundCountry = countries.find(country => country.id === parseInt(req.params.id,10)
-    // console.log({countryId: country.id});
-  )
-  console.log(foundCountry);
-  if (foundCountry) {
-    res.send(foundCountry);
-  } else {
-    res.status(404).send("There's no country with this id");
-  }
-});
+  // const foundImage = null 
+  console.log(req.params.id);
+  const foundCountry = countries.find(country => country.id === parseInt(req.params.id,10));
+    if(foundCountry){
+      res.send(foundCountry);
+    } else {
+      res.status(404).send("There's no country with this id");
+    }
+    console.log(foundCountry);
+}
+)
+
+
 
 // Update an expression
 // mockCountryRouter.put("/:id", (req, res, next) => {
