@@ -20,12 +20,19 @@ app.use(bodyParser.json());
 //   res.end('am i working?');
 // });
 
+
 app.get('/', (req, res) =>{
     client
         .query("SELECT * FROM countries")
         .then((data) => res.send(data.rows))
-        .then((data)=> console.log(data.rows))
+       
         .catch((error)=> res.sendStatus(500));
+
+app.use(cors())
+app.use(express.static('assets'));
+//listen for request on port 3000, and as a callback function have the port listened on logged
+app.listen(port,  () => {
+  console.log(`the server is working http://${hostname}:${port}/`)
 })
 
 
