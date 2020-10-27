@@ -7,7 +7,7 @@ const countries = [
     contentType: "image/jpeg",
     fileName: "brazil.jpg",
     url:
-      "//images.ctfassets.net/3evqbw19xpvd/2B1dNgnRyDv125ytsrRaG1/d830ef0bfcd962b5da234bd1b613e28a/brazil.jpg",
+      "https://www.impulsonegocios.com/wp-content/uploads/2020/05/Cristo-redentor-RJ-DEF.jpg",
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ const countries = [
     contentType: "image/jpeg",
     fileName: "Nigeria-national-arts-theatre.jpg",
     url:
-      "//images.ctfassets.net/3evqbw19xpvd/6gRT1HkV5v9lKVNSuKfhDd/3b1d1034fbd4f736e7bb816e797ae9db/Nigeria-national-arts-theatre.jpg",
+      "https://media-cdn.tripadvisor.com/media/photo-s/05/7a/1a/bc/national-arts-theatre.jpg",
   },
 ];
 
