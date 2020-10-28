@@ -21,7 +21,8 @@ app.use(bodyParser.json());
 // });
 
 
-app.get('/', (req, res) =>{
+
+/* app.get('/', (req, res) =>{
     client
         .query("SELECT * FROM countries")
         .then((data) => res.send(data.rows))
@@ -34,15 +35,16 @@ app.use(express.static('assets'));
 app.listen(port,  () => {
   console.log(`the server is working http://${hostname}:${port}/`)
 })
-
+ */
 
 
 // Init Country Router
-const mockCountryRouter = require('./mockCountry.js')
-app.use('/mockCountry',mockCountryRouter)
+const CountryRouter = require('./country.js')
+app.use('/countries', CountryRouter)
 // Init Recipes Router
-const mockRecipesRouter = require('./mockRecipes.js')
-app.use('/mockRecipes',mockRecipesRouter)
+const RecipesRouter = require('./recipes.js')
+app.use('/recipes', RecipesRouter)
+
 
 
 
@@ -50,5 +52,5 @@ app.use('/mockRecipes',mockRecipesRouter)
 app.use(cors())
 //listen for request on port 3000, and as a callback function have the port listened on logged
 app.listen(port,  () => {
-  console.log(`the server is working http://${hostname}:${port}/`)
+console.log(`the server is working http://${hostname}:${port}/`)
 })

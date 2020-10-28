@@ -1,4 +1,7 @@
 const express = require("express");
+CountryRouter = express.Router();
+const client = require('./client');
+/*const countries = [
 const fs = require("fs")
 const app = express();
 
@@ -32,16 +35,49 @@ const countries = [
     fileName: "/images/countries/USA.jpg",
   },
 ];
+*/
 
-// Get all countries
-mockCountryRouter.get("/", (req, res, next) => {
-  res.send(countries);
-});
+// Get all countries from Elephant sql
+CountryRouter.get('/', (req, res) =>{
+  client
+      .query("SELECT * FROM countries")
+      .then((data) => res.send(data.rows))
+      .then((data)=> console.log(data.rows))
+      .catch((error)=> res.sendStatus(500));
+})
 
 
+CountryRouter.get('/:id', (req, res)=>{
+  const { id } = req.params;
+  client
+    .query("SELECT * FROM countries WHERE id=$1", [id])
+    .then((data)=> res.json(data.rows))
+    .catch((error)=> res.sendStatus(500));
+})
+
+
+
+
+
+
+
+
+/* // Get a single expression
+CountryRouter.get("/:id", (req, res, next) => {
+  // console.log({paramsId: req.params.id})
+  const foundCountry = find(country => country.id === parseInt(req.params.id, 10)
+    // console.log({countryId: country.id});
+  )
+  console.log(foundCountry);
+  if (foundCountry) {
+    res.send(foundCountry);
+  } else {
+    res.status(404).send("There's no country with this id");
+  }
+}); */
 // app.use(express.static('/assets/images/countries/'))
 // Get a single expression
-mockCountryRouter.get("/:id", (req, res, next) => {
+/* mockCountryRouter.get("/:id", (req, res, next) => {
   // const foundImage = null 
   console.log(req.params.id);
   const foundCountry = countries.find(country => country.id === parseInt(req.params.id,10));
@@ -52,7 +88,7 @@ mockCountryRouter.get("/:id", (req, res, next) => {
     }
     console.log(foundCountry);
 }
-)
+) */
 
 
 
@@ -89,4 +125,4 @@ mockCountryRouter.get("/:id", (req, res, next) => {
 //   }
 // });
 
-module.exports = mockCountryRouter;
+module.exports = CountryRouter;
