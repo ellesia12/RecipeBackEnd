@@ -1,6 +1,7 @@
 const express = require("express");
-mockCountryRouter = express.Router();
-const countries = [
+CountryRouter = express.Router();
+const client = require('./client');
+/*const countries = [
   {
     id: 1,
     countryDescription: "Brazil",
@@ -18,16 +19,37 @@ const countries = [
       "https://media-cdn.tripadvisor.com/media/photo-s/05/7a/1a/bc/national-arts-theatre.jpg",
   },
 ];
+*/
 
-// Get all countries
-mockCountryRouter.get("/", (req, res, next) => {
-  res.send(countries);
-});
+// Get all countries from Elephant sql
+CountryRouter.get('/', (req, res) =>{
+  client
+      .query("SELECT * FROM countries")
+      .then((data) => res.send(data.rows))
+      .then((data)=> console.log(data.rows))
+      .catch((error)=> res.sendStatus(500));
+})
 
-// Get a single expression
-mockCountryRouter.get("/:id", (req, res, next) => {
+
+CountryRouter.get('/:id', (req, res)=>{
+  const { id } = req.params;
+  client
+    .query("SELECT * FROM countries WHERE id=$1", [id])
+    .then((data)=> res.json(data.rows))
+    .catch((error)=> res.sendStatus(500));
+})
+
+
+
+
+
+
+
+
+/* // Get a single expression
+CountryRouter.get("/:id", (req, res, next) => {
   // console.log({paramsId: req.params.id})
-  const foundCountry = countries.find(country => country.id === parseInt(req.params.id,10)
+  const foundCountry = find(country => country.id === parseInt(req.params.id, 10)
     // console.log({countryId: country.id});
   )
   console.log(foundCountry);
@@ -36,7 +58,7 @@ mockCountryRouter.get("/:id", (req, res, next) => {
   } else {
     res.status(404).send("There's no country with this id");
   }
-});
+}); */
 
 // Update an expression
 // mockCountryRouter.put("/:id", (req, res, next) => {
@@ -71,4 +93,4 @@ mockCountryRouter.get("/:id", (req, res, next) => {
 //   }
 // });
 
-module.exports = mockCountryRouter;
+module.exports = CountryRouter;

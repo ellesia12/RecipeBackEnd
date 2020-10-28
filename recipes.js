@@ -1,5 +1,27 @@
 const express = require("express");
-mockRecipesRouter = express.Router();
+RecipesRouter = express.Router();
+const client = require('./client');
+
+RecipesRouter.get('/', (req, res) =>{
+
+  client
+      .query("SELECT * FROM recipes")
+      .then((data) => res.send(data.rows))
+      .then((data)=> console.log(data.rows))
+      .catch((error)=> res.sendStatus(500));
+})
+
+
+RecipesRouter.get('/:id', (req, res)=>{
+  const { id } = req.params;
+  client
+    .query("SELECT * FROM recipes WHERE id=$1", [id])
+    .then((data)=> res.json(data.rows))
+    .catch((error)=> res.sendStatus(500));
+})
+
+
+/*
 const recipes = [
 {
   id: 1,
@@ -34,13 +56,32 @@ const recipes = [
   url: "//images.ctfassets.net/3evqbw19xpvd/18yDKyrmt2cjZXHAfpz9sN/170433bf59bceadf0d3d6eb0b4ace63b/homepage-nigerian.jpg",
 },
 ]
+*/
+
+/* RecipesRouter.get('/recipes', (req, res) =>{
+  //client
+     /*  .query("")
+      .then((data)=> res.send())
+      .catch((error)=>res.sendStatus(500)) */
+     // res.send("Welcome to the Jungle!");   
+/* } 
+) */
 
 // Get all countries
-mockRecipesRouter.get("/", (req, res, next) => {
+/* RecipesRouter.get("/recipes", (req, res, next) => {
   res.send(recipes);
-});
-// Get a single expression
-mockRecipesRouter.get("/:id", (req, res, next) => {
+}); */
+
+/* RecipesRouter.get('/recipes/:id', (req, res)=>{
+  const { id } = req.params;
+  client
+    .query("SELECT * FROM recipes WHERE id=$1", [id])
+    .then((data)=> res.json(data.rows))
+    .catch((error)=> res.sendStatus(500));
+})
+ */
+/* // Get a single expression
+RecipesRouter.get("/recipes/:id", (req, res, next) => {
   const foundRecipe = recipes.find(recipe => recipe.id === req.params.id);
   console.log(recipes.id)
   if (foundRecipe) {
@@ -48,6 +89,6 @@ mockRecipesRouter.get("/:id", (req, res, next) => {
   } else {
     res.status(404).send('This recipe was not found');
   }
-});
+}); */
 
-module.exports = mockRecipesRouter;
+module.exports = RecipesRouter;
