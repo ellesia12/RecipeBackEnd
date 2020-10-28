@@ -1,14 +1,14 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
+const cors = require("cors");
 const bodyParser = require('body-parser');
-const cors = require("cors")
 const app = express();
 const http = require("http");
 const client = require('./client');
 const hostname = '127.0.0.1';
 const port = process.env.PORT || 3000;
-
+app.use(cors());
 app.use(bodyParser.json());
 //Create HTTP server and listen on port 3000 for requests
 
@@ -49,7 +49,7 @@ app.use('/recipes', RecipesRouter)
 
 
 
-app.use(cors())
+
 //listen for request on port 3000, and as a callback function have the port listened on logged
 app.listen(port,  () => {
 console.log(`the server is working http://${hostname}:${port}/`)
