@@ -11,6 +11,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 //Create HTTP server and listen on port 3000 for requests
+app.use(express.static('assets'));
 
 // const server = http.createServer((req, res) => {
 
@@ -29,8 +30,8 @@ app.use(bodyParser.json());
        
         .catch((error)=> res.sendStatus(500));
 
-app.use(cors())
-app.use(express.static('assets'));
+app.use(cors()) */
+/*
 //listen for request on port 3000, and as a callback function have the port listened on logged
 app.listen(port,  () => {
   console.log(`the server is working http://${hostname}:${port}/`)
