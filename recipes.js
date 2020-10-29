@@ -21,6 +21,13 @@ RecipesRouter.get('/:id', (req, res)=>{
     .catch((error)=> res.sendStatus(500));
 })
 
+RecipesRouter.get('/relatedc/:countryid', (req, res)=>{
+  const { countryid } = req.params;
+  client
+    .query("SELECT * FROM recipes WHERE countryid=$1", [countryid])
+    .then((data)=> res.json(data.rows))
+    .catch((error)=> res.sendStatus(500));
+})
 
 /*
 const recipes = [
